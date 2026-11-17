@@ -7,17 +7,17 @@ Projeto desenvolvido para uma atividade da faculdade (FATEC – DSM).
 
 # Como funciona:
 
-Tela inicial: apresenta o app e leva para a tela do dado.
-Tela do dado: fica "escutando" o acelerômetro.
-Ao detectar agitação, o dado entra em estado rolando: gira e troca de face rapidamente.
-Quando o celular fica cerca de 1 segundo sem ser agitado, o app sorteia um número de 1 a 20, o dado para na face correspondente e exibe o resultado.
+- Tela inicial: apresenta o app e leva para a tela do dado.
+- Tela do dado: fica "escutando" o acelerômetro.
+- Ao detectar agitação, o dado entra em estado rolando: gira e troca de face rapidamente.
+- Quando o celular fica cerca de 1 segundo sem ser agitado, o app sorteia um número de 1 a 20, o dado para na face correspondente e exibe o resultado.
 
 
 # Estados da tela do dado:
 
-parado:	Aguardando. Mostra "Agite o celular!"
-rolando:	Dado girando e trocando de face. Fundo fica verde.
-resultado:	Dado parado na face sorteada. Mostra "Você tirou: N número"
+- parado:	Aguardando. Mostra "Agite o celular!"
+- rolando:	Dado girando e trocando de face. Fundo fica verde.
+- resultado:	Dado parado na face sorteada. Mostra "Você tirou: N número"
 
 
 # Detecção de agitação:
@@ -41,9 +41,9 @@ Se a magnitude passar de LIMITE_AGITACAO, considera-se que o aparelho está send
 
 -> Pré-requisitos:
 
-Node.js instalado
-Um celular físico com o app Expo Go 
-Celular e computador na mesma rede Wi-Fi
+- Node.js instalado
+- Um celular físico com o app Expo Go 
+- Celular e computador na mesma rede Wi-Fi
 
 -> Passos:
 
