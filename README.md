@@ -1,56 +1,61 @@
-# Welcome to your Expo app 👋
+Dado de RPG (d20) com Sensores
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Aplicativo mobile feito com React Native + Expo que simula um dado de 20 lados (d20). Não há botão para rolar: o dado é lançado agitando o celular, usando o acelerômetro do aparelho. Quando a agitação para por um instante, o dado "assenta" em uma face e mostra o número sorteado.
 
-## Get started
+Projeto desenvolvido para uma atividade da faculdade (FATEC – DSM).
 
-1. Install dependencies
+Como funciona
+Tela inicial: apresenta o app e leva para a tela do dado.
+Tela do dado: fica "escutando" o acelerômetro.
+Ao detectar agitação, o dado entra em estado rolando: gira e troca de face rapidamente.
+Quando o celular fica cerca de 1 segundo sem ser agitado, o app sorteia um número de 1 a 20, o dado para na face correspondente (com um pequeno "quique") e exibe o resultado.
+Estados da tela do dado
+Estado	O que acontece
+parado	Aguardando. Mostra "Agite o celular!"
+rolando	Dado girando e trocando de face. Fundo fica vermelho
+resultado	Dado parado na face sorteada. Mostra "Você tirou: N"
+Detecção de agitação
 
-   ```bash
-   npm install
-   ```
+O acelerômetro retorna os valores x, y e z em G (a gravidade está incluída, então com o celular parado a leitura fica perto de 1.0 G). O app calcula a magnitude:
 
-2. Start the app
+magnitude = √(x² + y² + z²)
 
-   ```bash
-   npx expo start
-   ```
+Se a magnitude passar de LIMITE_AGITACAO, considera-se que o aparelho está sendo agitado. Cada leitura forte reinicia um temporizador; quando ele completa PAUSA_PARA_SORTEAR sem nova agitação, o resultado é sorteado.
 
-In the output, you'll find options to open the app in a
+Tecnologias
+Expo (SDK 58) e React Native 0.88
+Expo Router – navegação baseada em arquivos
+expo-sensors – acelerômetro
+React Native Reanimated – animações de giro e "quique"
+TypeScript
+Estrutura do projeto
+├── assets/
+│   └── images/
+│       └── d20/              # 20 imagens, uma por face (d20_01.png ... d20_20.png)
+├── src/
+│   ├── app/
+│   │   ├── _layout.tsx       # Navegação (Stack)
+│   │   ├── index.tsx         # Tela inicial
+│   │   └── dado.tsx          # Tela do dado (sensor + animação)
+│   ├── constants/
+│   │   └── faces.ts          # Mapa número → imagem da face
+│   └── styles.js             # Estilos da tela inicial
+├── app.json
+└── package.json
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+No React Native, require() de imagem não aceita caminho montado dinamicamente. Por isso as 20 imagens são mapeadas manualmente em src/constants/faces.ts.
 
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Como executar
+Pré-requisitos
+Node.js instalado
+Um celular físico com o app Expo Go (o acelerômetro não funciona bem em simulador/emulador)
+Celular e computador na mesma rede Wi-Fi
+Passos
+bash
+# 1. Instalar as dependências
+npm install
 
-## Get a fresh project
+# 2. Iniciar o servidor de desenvolvimento
+npx expo start
 
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
-
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Depois, escaneie o QR Code exibido no terminal com o Expo Go (Android) ou com a câmera (iOS) e agite o celular na tela do dado.
