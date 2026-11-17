@@ -1,4 +1,4 @@
-# Dado de RPG (d20) com Sensores:
+# Dado de RPG (d20) com Sensores 🎲:
 
 Aplicativo mobile feito com React Native + Expo que simula um dado de 20 lados (d20). Não há botão para rolar: o dado é lançado agitando o celular, usando o acelerômetro do aparelho. Quando a agitação para por um instante, o dado para em uma face e mostra o número sorteado.
 
@@ -31,22 +31,6 @@ Se a magnitude passar de LIMITE_AGITACAO, considera-se que o aparelho está send
 - expo-sensors – acelerômetro
 - React Native Reanimated – animações de giro e "quique"
 - TypeScript
-
-# Estrutura do projeto:
-
-├── assets/
-│   └── images/
-│       └── d20/              # 20 imagens, uma por face (d20_01.png ... d20_20.png)
-├── src/
-│   ├── app/
-│   │   ├── _layout.tsx       # Navegação (Stack)
-│   │   ├── index.tsx         # Tela inicial
-│   │   └── dado.tsx          # Tela do dado (sensor + animação)
-│   ├── constants/
-│   │   └── faces.ts          # Mapa número → imagem da face
-│   └── styles.js             # Estilos da tela inicial
-├── app.json
-└── package.json
 
 # Como executar:
 
